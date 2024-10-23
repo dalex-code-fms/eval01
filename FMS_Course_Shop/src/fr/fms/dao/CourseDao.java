@@ -36,7 +36,20 @@ public class CourseDao implements Dao<Courses>{
 
 	@Override
 	public boolean update(Courses obj) {
-		// TODO Auto-generated method stub
+		String strSQL = "UPDATE T_Courses SET name=?, description=?, duration=?, format=?, price=?, idCategory=?;";
+		
+		try(PreparedStatement ps = connection.prepareStatement(strSQL)){
+			ps.setString(1, obj.getName());
+			ps.setString(2, obj.getDescription());
+			ps.setInt(3, obj.getDuration());
+			ps.setString(4, obj.getFormat());
+			ps.setDouble(5, obj.getPrice());
+			ps.setInt(6, obj.getIdCategory());
+			
+			if (ps.executeUpdate() == 1) return true;
+		}catch(SQLException e) {
+			logger.severe("SQL problem when trying to update a course : " + e.getMessage());
+		}
 		return false;
 	}
 
@@ -63,7 +76,6 @@ public class CourseDao implements Dao<Courses>{
 							rs.getDouble("price"),
 							rs.getInt("idCategory")
 							);
-					
 					courses.add(course);
 				}
 			}
