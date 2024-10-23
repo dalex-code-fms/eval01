@@ -9,10 +9,8 @@ public class TestDao {
 
 		CourseDao courseDao = new CourseDao();
 
-		Courses course = courseDao.read(2);
-		course.setDuration(60);
-		System.out.println(courseDao.read(2));
-		courseDao.update(course);
+		Courses course = courseDao.read(13);
+		courseDao.delete(course);
 
 		System.out.println(courseDao.readAll());
 	}

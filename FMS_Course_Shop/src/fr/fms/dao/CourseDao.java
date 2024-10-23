@@ -75,7 +75,16 @@ public class CourseDao implements Dao<Courses> {
 
 	@Override
 	public boolean delete(Courses obj) {
-		// TODO Auto-generated method stub
+		String strSQL = "DELETE FROM T_Courses WHERE id=?;";
+
+		try (PreparedStatement ps = connection.prepareStatement(strSQL)) {
+			ps.setInt(1, obj.getId());
+
+			if (ps.executeUpdate() > 0)
+				return true;
+		} catch (SQLException e) {
+			logger.severe("SQL problem when trying to delete a course : " + e.getMessage());
+		}
 		return false;
 	}
 
