@@ -7,7 +7,18 @@ import java.util.ArrayList;
 
 import fr.fms.entities.Courses;
 
+/**
+ * Data Access Object (DAO) for managing Course entities in the database.
+ */
+
 public class CourseDao implements Dao<Courses> {
+
+	/**
+	 * Creates a new course in the database.
+	 * 
+	 * @param obj The course object.
+	 * @return true if the course was created and false if not.
+	 */
 
 	@Override
 	public boolean create(Courses obj) {
@@ -28,6 +39,13 @@ public class CourseDao implements Dao<Courses> {
 		}
 		return false;
 	}
+
+	/**
+	 * Reads a course from the database based on the its ID.
+	 * 
+	 * @param id The ID of the course.
+	 * @return The course obj if found and null if not.
+	 */
 
 	@Override
 	public Courses read(int id) {
@@ -52,6 +70,13 @@ public class CourseDao implements Dao<Courses> {
 		return null;
 	}
 
+	/**
+	 * Updates a course in the database.
+	 * 
+	 * @param obj The course object with updated values.
+	 * @return true if the course was been updated, false if not.
+	 */
+
 	@Override
 	public boolean update(Courses obj) {
 		String strSQL = "UPDATE T_Courses SET name=?, description=?, duration=?, format=?, price=?, idCategory=? WHERE id=?;";
@@ -73,6 +98,13 @@ public class CourseDao implements Dao<Courses> {
 		return false;
 	}
 
+	/**
+	 * Deletes a course from the database.
+	 * 
+	 * @param obj The course object to delete.
+	 * @return true if the course was deleted, false if not.
+	 */
+
 	@Override
 	public boolean delete(Courses obj) {
 		String strSQL = "DELETE FROM T_Courses WHERE id=?;";
@@ -87,6 +119,12 @@ public class CourseDao implements Dao<Courses> {
 		}
 		return false;
 	}
+
+	/**
+	 * Reads all courses from the database.
+	 * 
+	 * @return a list of all courses.
+	 */
 
 	@Override
 	public ArrayList<Courses> readAll() {
