@@ -30,7 +30,7 @@ CREATE TABLE T_Customers (
 	phone 			varchar(20)	,
 	address			varchar(50)	,
 	idUser			int(4)			NOT NULL,
-	FOREIGN KEY (idUser)	REFERENCES T_Users(id)
+	FOREIGN KEY (idUser)			REFERENCES T_Users(id)
 ) ENGINE = InnoDB;
 
 -- ----------------------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ CREATE TABLE T_Courses (
 	format				varchar(20)		NOT NULL,
 	price				float(4)		NOT NULL DEFAULT 10,
 	idCategory			int(4),
-	FOREIGN KEY (idCategory) REFERENCES T_Categories(id)
+	FOREIGN KEY (idCategory) 			REFERENCES T_Categories(id)
 ) ENGINE = InnoDB;
 
 INSERT INTO T_Courses (name, description, duration, format, price, idCategory) VALUES 
@@ -81,10 +81,10 @@ INSERT INTO T_Courses (name, description, duration, format, price, idCategory) V
 
 CREATE TABLE T_Orders (
 	id				int(4)		PRIMARY KEY AUTO_INCREMENT,
-	totalPrice			float(4)	NOT NULL DEFAULT 0,
-	dateOrder 			date		NOT NULL DEFAULT NOW(),
-	idCustomer          INT(4)   	NOT NULL,
-	FOREIGN KEY(idCustomer)	REFERENCES T_Customers(id)
+	totalPrice		float(4)	NOT NULL DEFAULT 0,
+	dateOrder 		date		NOT NULL DEFAULT NOW(),
+	idCustomer      int(4)   	NOT NULL,
+	FOREIGN KEY(idCustomer)		REFERENCES T_Customers(id)
 ) ENGINE = InnoDB;
 
 -- ----------------------------------------------------------------------------------------------------
@@ -95,9 +95,9 @@ CREATE TABLE T_Order_Items (
 	id				int(4)		PRIMARY KEY AUTO_INCREMENT,
 	idCourse        int(4)   	NOT NULL,
 	price			float(4)	NOT NULL DEFAULT 0,
-	idOrder         int(4)   NOT NULL,
-	FOREIGN KEY(idCourse) REFERENCES T_Courses(id),
-	FOREIGN KEY(idOrder) REFERENCES T_Orders(id)
+	idOrder         int(4)   	NOT NULL,
+	FOREIGN KEY(idCourse) 		REFERENCES T_Courses(id),
+	FOREIGN KEY(idOrder) 		REFERENCES T_Orders(id)
 ) ENGINE = InnoDB;
 
 
