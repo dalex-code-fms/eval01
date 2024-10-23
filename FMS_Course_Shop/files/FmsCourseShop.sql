@@ -16,7 +16,7 @@ CREATE TABLE T_Users (
 	pwd				varchar(20)		NOT NULL
 ) ENGINE = InnoDB;
 
-INSERT INTO T_Users ( Login, Password) VALUES ( 'klariany', 'fms123' );
+INSERT INTO T_Users ( login, pwd) VALUES ( 'klariany', 'fms123' );
 
 -- ----------------------------------------------------------------------------------------------------
 -- ---                               BUILD CUSTOMERS TABLE                                          ---

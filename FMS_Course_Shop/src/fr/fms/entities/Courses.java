@@ -18,9 +18,19 @@ public class Courses {
 		this.idCategory= idCategory;
 	}
 	
+	public Courses(int id, String name, String description, int duration, String format, double price, int idCategory) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.duration = duration;
+		this.format = format;
+		this.price = price;
+		this.idCategory= idCategory;
+	}
+	
 	@Override
 	public String toString() {
-		return String.format("Course : %d %s, %s, %d, %s, %f, %d", id, name, description, duration, format, price, idCategory);
+		return String.format("Course [id=%d, name='%s', description='%s', duration=%d, format='%s', price=%.2f, idCategory=%d]%n", id, name, description, duration, format, price, idCategory);
 	}
 
 	public int getId() {

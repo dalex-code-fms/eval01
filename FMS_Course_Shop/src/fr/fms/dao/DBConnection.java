@@ -24,6 +24,8 @@ public class DBConnection {
 			getConfigFile();
 			Class.forName(driver);
 			connection = DriverManager.getConnection(url, login, pwd);
+			
+			System.out.println("connected");
 		}catch (ClassNotFoundException e) {
 			logger.severe("Problem connecting to jdbc driver : " + e.getMessage());
 		}catch (SQLException e) {
