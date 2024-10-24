@@ -3,9 +3,11 @@ package fr.fms;
 import fr.fms.dao.CategoryDao;
 import fr.fms.dao.CourseDao;
 import fr.fms.dao.CustomerDao;
+import fr.fms.dao.OrderDao;
 import fr.fms.dao.UserDao;
 import fr.fms.entities.Category;
 import fr.fms.entities.Customer;
+import fr.fms.entities.Order;
 import fr.fms.entities.User;
 
 public class TestDao {
@@ -55,8 +57,15 @@ public class TestDao {
 		Category catN = cat.read(1);
 		catN.setName("Hello");
 		cat.update(catN);
-		cat.delete(catN);
+
 		System.out.println(cat.readAll());
+
+		OrderDao order = new OrderDao();
+
+		order.create(new Order(59.9, 3));
+		order.create(new Order(150, 4));
+
+		System.out.println(order.readAll());
 
 	}
 
