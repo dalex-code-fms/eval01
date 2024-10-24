@@ -7,7 +7,18 @@ import java.util.ArrayList;
 
 import fr.fms.entities.Customer;
 
+/**
+ * Data Access Object (DAO) for managing Customer entities in the database.
+ */
+
 public class CustomerDao implements Dao<Customer> {
+
+	/**
+	 * Creates a nex customer in the database.
+	 * 
+	 * @param obj The customer object.
+	 * @return true if the customer has been created, false if not
+	 */
 
 	@Override
 	public boolean create(Customer obj) {
@@ -30,6 +41,13 @@ public class CustomerDao implements Dao<Customer> {
 		return false;
 	}
 
+	/**
+	 * Reads a customer from the database based on its ID.
+	 * 
+	 * @param id The ID of the customer
+	 * @return The customer object if found, null if not.
+	 */
+
 	@Override
 	public Customer read(int id) {
 		String strSQL = "SELECT * FROM T_Customers WHERE id = ?;";
@@ -47,6 +65,13 @@ public class CustomerDao implements Dao<Customer> {
 		}
 		return null;
 	}
+
+	/**
+	 * Updates a customer in the database.
+	 * 
+	 * @param obj The customer object with updated values.
+	 * @return true if the customer has been updated, false if not.
+	 */
 
 	@Override
 	public boolean update(Customer obj) {
@@ -70,6 +95,13 @@ public class CustomerDao implements Dao<Customer> {
 		return false;
 	}
 
+	/**
+	 * Deletes a customer from the database.
+	 * 
+	 * @param obj The customer obj.
+	 * @return true if the customer has been deleted, false if not.
+	 */
+
 	@Override
 	public boolean delete(Customer obj) {
 		String strSQL = "DELETE FROM T_Customers WHERE id = ?;";
@@ -86,6 +118,12 @@ public class CustomerDao implements Dao<Customer> {
 
 		return false;
 	}
+
+	/**
+	 * Reads all customers in the database.
+	 * 
+	 * @return A list of all customers.
+	 */
 
 	@Override
 	public ArrayList<Customer> readAll() {
@@ -107,6 +145,13 @@ public class CustomerDao implements Dao<Customer> {
 		}
 		return null;
 	}
+
+	/**
+	 * Find customer in the database by is email.
+	 * 
+	 * @param email
+	 * @return The customer object if found in the database.
+	 */
 
 	public Customer findCustomerByEmail(String email) {
 		String strSQL = "SELECT * FROM T_Customers WHERE email=?;";

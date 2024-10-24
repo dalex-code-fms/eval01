@@ -17,7 +17,7 @@ public class CourseDao implements Dao<Courses> {
 	 * Creates a new course in the database.
 	 * 
 	 * @param obj The course object.
-	 * @return true if the course was created and false if not.
+	 * @return true if the course has been created and false if not.
 	 */
 
 	@Override
