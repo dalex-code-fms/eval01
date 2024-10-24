@@ -7,18 +7,30 @@ public class Customer {
 	private String email;
 	private String address;
 	private String phone;
-	
-	public Customer(String firstName, String lastName, String email, String address, String phone) {
+	private int idUser;
+
+	public Customer(String firstName, String lastName, String email, String address, String phone, int idUser) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.address = address;
 		this.phone = phone;
+		this.idUser = idUser;
 	}
-	
+
 	@Override
 	public String toString() {
-		return String.format("Customer : %d, %s, %s, %s, %s, %s%n", id, firstName, lastName, email, address, phone);
+		return String.format(
+				"Customer : [id='%d', firstName='%s', lastName='%s', email='%s', address='%s', phone='%s', idUser='%d']%n",
+				id, firstName, lastName, email, address, phone, idUser);
+	}
+
+	public int getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
 	}
 
 	public int getId() {
