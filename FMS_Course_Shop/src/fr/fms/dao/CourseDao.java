@@ -136,6 +136,7 @@ public class CourseDao implements Dao<Courses> {
 							rs.getInt("duration"), rs.getString("format"), rs.getDouble("price"),
 							rs.getInt("idCategory")));
 				}
+				return courses;
 			}
 		} catch (SQLException e) {
 			logger.severe("SQL problem when trying to read all courses : " + e.getMessage());

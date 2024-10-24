@@ -89,7 +89,22 @@ public class CustomerDao implements Dao<Customer> {
 
 	@Override
 	public ArrayList<Customer> readAll() {
-		// TODO Auto-generated method stub
+		ArrayList<Customer> customers = new ArrayList<>();
+
+		String strSQL = "SELECT * FROM T_Customers;";
+
+		try (PreparedStatement ps = connection.prepareStatement(strSQL)) {
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					customers.add(new Customer(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"),
+							rs.getString("email"), rs.getString("address"), rs.getString("phone"),
+							rs.getInt("idUser")));
+				}
+				return customers;
+			}
+		} catch (SQLException e) {
+			logger.severe("SQL problem when trying do display all customers : " + e.getMessage());
+		}
 		return null;
 	}
 

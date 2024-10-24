@@ -31,17 +31,18 @@ public class TestDao {
 		System.out.println(userDao.readAll());
 		System.out.println(courseDao.readAll());
 
-		// csDao.create(new Customer("david", "rodrigues", "david@fms.fr", "dax",
-		// "0655413289", 1));
+		csDao.create(new Customer("david", "rodrigues", "david@fms.fr", "dax", "0655413289", 1));
+		csDao.create(new Customer("sabrina", "santos", "sabrina@fms.fr", "dax", "0655413290", 1));
 
-		Customer customer = csDao.read(1);
+		// Customer customer = csDao.read(1);
 
-		System.out.println(customer);
+		// System.out.println(customer);
 
-		customer.setAddress("Bayonne");
-		csDao.update(customer);
+		// customer.setAddress("Bayonne");
+		// csDao.update(customer);
 
 		// csDao.delete(customer);
+		System.out.println(csDao.readAll());
 
 	}
 
