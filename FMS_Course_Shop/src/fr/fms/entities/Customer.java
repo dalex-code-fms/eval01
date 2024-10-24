@@ -18,6 +18,16 @@ public class Customer {
 		this.idUser = idUser;
 	}
 
+	public Customer(int id, String firstName, String lastName, String email, String address, String phone, int idUser) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.address = address;
+		this.phone = phone;
+		this.idUser = idUser;
+	}
+
 	@Override
 	public String toString() {
 		return String.format(

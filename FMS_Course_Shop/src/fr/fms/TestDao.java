@@ -33,6 +33,10 @@ public class TestDao {
 
 		csDao.create(new Customer("david", "rodrigues", "david@fms.fr", "dax", "0655413289", 1));
 
+		Customer customer = csDao.read(1);
+
+		System.out.println(customer);
+
 	}
 
 }

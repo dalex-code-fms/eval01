@@ -1,6 +1,7 @@
 package fr.fms.dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -31,7 +32,19 @@ public class CustomerDao implements Dao<Customer> {
 
 	@Override
 	public Customer read(int id) {
-		// TODO Auto-generated method stub
+		String strSQL = "SELECT * FROM T_Customers WHERE id = ?;";
+
+		try (PreparedStatement ps = connection.prepareStatement(strSQL)) {
+			ps.setInt(1, id);
+
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next())
+					return new Customer(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"),
+							rs.getString("email"), rs.getString("address"), rs.getString("phone"), rs.getInt("idUser"));
+			}
+		} catch (SQLException e) {
+			logger.severe("SQL problem when trying to read a customer : " + e.getMessage());
+		}
 		return null;
 	}
 
