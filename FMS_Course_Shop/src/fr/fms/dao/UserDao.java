@@ -41,13 +41,24 @@ public class UserDao implements Dao<User> {
 		} catch (SQLException e) {
 			logger.severe("SQL problem trying to read a user : " + e.getMessage());
 		}
-
 		return null;
 	}
 
 	@Override
 	public boolean update(User obj) {
-		// TODO Auto-generated method stub
+		String strSQL = "UPDATE T_Users SET login = ?, pwd = ? WHERE id = ?;";
+
+		try (PreparedStatement ps = connection.prepareStatement(strSQL)) {
+			ps.setString(1, obj.getLogin());
+			ps.setString(2, obj.getPwd());
+			ps.setInt(3, obj.getId());
+
+			if (ps.executeUpdate() == 1)
+				return true;
+		} catch (SQLException e) {
+			logger.severe("SQL problem when trying to update a user : " + e.getMessage());
+		}
+
 		return false;
 	}
 

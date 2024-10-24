@@ -17,6 +17,11 @@ public class TestDao {
 
 		System.out.println(user);
 		// System.out.println(courseDao.readAll());
+
+		user.setLogin("sabrina");
+		userDao.update(user);
+		user = userDao.read(2);
+		System.out.println(user);
 	}
 
 }
