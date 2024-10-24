@@ -22,6 +22,9 @@ public class TestDao {
 		userDao.update(user);
 		user = userDao.read(2);
 		System.out.println(user);
+
+		userDao.delete(user);
+
 	}
 
 }

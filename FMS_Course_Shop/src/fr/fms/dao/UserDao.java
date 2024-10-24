@@ -58,13 +58,21 @@ public class UserDao implements Dao<User> {
 		} catch (SQLException e) {
 			logger.severe("SQL problem when trying to update a user : " + e.getMessage());
 		}
-
 		return false;
 	}
 
 	@Override
 	public boolean delete(User obj) {
-		// TODO Auto-generated method stub
+		String strSQL = "DELETE FROM T_Users WHERE id = ?;";
+
+		try (PreparedStatement ps = connection.prepareStatement(strSQL)) {
+			ps.setInt(1, obj.getId());
+
+			if (ps.executeUpdate() > 0)
+				return true;
+		} catch (SQLException e) {
+			logger.severe("SQL problem when trying to delete a user : " + e.getMessage());
+		}
 		return false;
 	}
 
