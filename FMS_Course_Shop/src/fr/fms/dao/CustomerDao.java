@@ -72,7 +72,18 @@ public class CustomerDao implements Dao<Customer> {
 
 	@Override
 	public boolean delete(Customer obj) {
-		// TODO Auto-generated method stub
+		String strSQL = "DELETE FROM T_Customers WHERE id = ?;";
+
+		try (PreparedStatement ps = connection.prepareStatement(strSQL)) {
+			ps.setInt(1, obj.getId());
+
+			if (ps.executeUpdate() > 0)
+				return true;
+
+		} catch (SQLException e) {
+			logger.severe("SQL problem when trying to delete a customer : " + e.getMessage());
+		}
+
 		return false;
 	}
 

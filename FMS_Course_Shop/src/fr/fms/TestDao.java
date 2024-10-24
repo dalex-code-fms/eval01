@@ -41,6 +41,8 @@ public class TestDao {
 		customer.setAddress("Bayonne");
 		csDao.update(customer);
 
+		// csDao.delete(customer);
+
 	}
 
 }
