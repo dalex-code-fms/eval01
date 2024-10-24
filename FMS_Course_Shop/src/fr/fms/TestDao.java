@@ -13,18 +13,20 @@ public class TestDao {
 
 		// userDao.create(new User("david", "fms123"));
 
-		User user = userDao.read(2);
+		User user = userDao.read(4);
 
 		System.out.println(user);
 		// System.out.println(courseDao.readAll());
 
 		user.setLogin("sabrina");
 		userDao.update(user);
-		user = userDao.read(2);
+		user = userDao.read(4);
 		System.out.println(user);
 
-		userDao.delete(user);
+		// userDao.delete(user);
 
+		System.out.println(userDao.readAll());
+		System.out.println(courseDao.readAll());
 	}
 
 }

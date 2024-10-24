@@ -132,10 +132,9 @@ public class CourseDao implements Dao<Courses> {
 		try (PreparedStatement ps = connection.prepareStatement(strSQL)) {
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
-					Courses course = new Courses(rs.getInt("id"), rs.getString("name"), rs.getString("description"),
+					courses.add(new Courses(rs.getInt("id"), rs.getString("name"), rs.getString("description"),
 							rs.getInt("duration"), rs.getString("format"), rs.getDouble("price"),
-							rs.getInt("idCategory"));
-					courses.add(course);
+							rs.getInt("idCategory")));
 				}
 			}
 		} catch (SQLException e) {

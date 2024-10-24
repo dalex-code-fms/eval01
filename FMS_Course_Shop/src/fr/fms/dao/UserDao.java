@@ -78,7 +78,19 @@ public class UserDao implements Dao<User> {
 
 	@Override
 	public ArrayList<User> readAll() {
-		// TODO Auto-generated method stub
+		ArrayList<User> users = new ArrayList<>();
+		String strSQL = "SELECT * FROM T_Users;";
+
+		try (PreparedStatement ps = connection.prepareStatement(strSQL)) {
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					users.add(new User(rs.getInt("id"), rs.getString("login"), rs.getString("pwd")));
+				}
+				return users;
+			}
+		} catch (SQLException e) {
+			logger.severe("SQL Problem when trying to read all users : " + e.getMessage());
+		}
 		return null;
 	}
 
