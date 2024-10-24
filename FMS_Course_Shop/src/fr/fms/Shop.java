@@ -1,8 +1,10 @@
 package fr.fms;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import fr.fms.business.IBusinessImpl;
+import fr.fms.entities.Courses;
 
 public class Shop {
 
@@ -11,26 +13,97 @@ public class Shop {
 
 	public static void main(String[] args) {
 		System.out.println(
-				"--------------------------------------------------------------------------------------------------------------------------------------------------");
-
-		System.out.printf("|%59s%s%-59s|%n", "", "Welcome to FMS Course Shop", "");
+				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.printf("|%60s%s%-60s|%n", "", "Welcome to FMS Course Shop", "");
 		displayCourses();
+		int choice = 0;
 
+		while (choice != 10) {
+			displayMenu();
+			choice = verifyUserInput();
+			switch (choice) {
+			case 1:
+				addCourseToCart();
+				break;
+			case 2:
+				displayCart();
+				break;
+			case 3:
+				displayCourses();
+				displayOrderByMenu();
+				break;
+			}
+		}
+
+	}
+
+	public static void displayMenu() {
+		System.out.println(
+				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.printf("|%47s%s%-46s|%n", "", "Choose an action by entering the corresponding number", "");
+		System.out.println(
+				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.printf("|%-7s%s%7s|%-7s%s%7s|%-7s%s%7s|%-7s%s%7s|%-7s%s%8s|%n", "", "1 - ADD TO CART", "", "",
+				"2 - DISPLAY CART", "", "", "3 - DISPLAY COURSES BY:", "", "", "4 - LOGIN", "", "", "9 - EXIT", "");
+		System.out.println(
+				"----------------------------------------------------------------------------------------------------------------------------------------------------");
 	}
 
 	public static void displayCourses() {
 		System.out.println(
-				"--------------------------------------------------------------------------------------------------------------------------------------------------");
-		System.out.printf("%-5s | %-35s | %-50s | %-8s | %-10s | %-10s | %-8s |%n", "ID", "NAME", "DESCRIPTION",
+				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.printf("| %-5s | %-35s | %-50s | %-8s | %-10s | %-10s | %-8s |%n", "ID", "NAME", "DESCRIPTION",
 				"DURATION", "FORMAT", "PRICE", "CATEGORY");
 		System.out.println(
-				"--------------------------------------------------------------------------------------------------------------------------------------------------");
+				"----------------------------------------------------------------------------------------------------------------------------------------------------");
 		ibus.readAllCourses()
-				.forEach(course -> System.out.printf("%-5s | %-35s | %-50s | %-8s | %-10s | %-10s | %-8s |%n",
+				.forEach(course -> System.out.printf("| %-5s | %-35s | %-50s | %-8s | %-10s | %-10s | %-8s |%n",
 						course.getId(), course.getName(), course.getDescription(), course.getDuration(),
 						course.getFormat(), course.getPrice(), course.getIdCategory()));
 		System.out.println(
-				"--------------------------------------------------------------------------------------------------------------------------------------------------");
+				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+	}
+
+	public static void displayCart() {
+		System.out.println(
+				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.println("| Cart |");
+		System.out.println(
+				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+		ArrayList<Courses> cart = ibus.getCart();
+		cart.forEach(course -> System.out.printf("| %-5s | %-35s | %-50s | %-8s | %-10s | %-10s | %-8s |%n",
+				course.getId(), course.getName(), course.getDescription(), course.getDuration(), course.getFormat(),
+				course.getPrice(), course.getIdCategory()));
+	}
+
+	public static void displayOrderByMenu() {
+		int choice = verifyUserInput();
+		System.out.println("| 1 - CATEGORIES | 2 - KEYWORD | 3 - FORMAT | 4 - PRICE | 5 - GO BACK");
+		switch (choice) {
+		case 1:
+
+			break;
+		}
+	}
+
+	public static void addCourseToCart() {
+		System.out.println("Choose a course by enter the corresponding number");
+		int id = verifyUserInput();
+		Courses course = ibus.readOneCourse(id);
+
+		if (course != null) {
+			ibus.addToCart(course);
+			System.err.printf("Added successfully the course: '%s' to the cart.%n", course.getName());
+		} else
+			System.out.println("The course id choosen is not valid !");
+	}
+
+	public static int verifyUserInput() {
+		while (!sc.hasNextInt()) {
+			System.out.println("You have to enter a valid number !");
+			sc.next();
+		}
+		return sc.nextInt();
 	}
 
 }

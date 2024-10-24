@@ -8,12 +8,16 @@ import fr.fms.entities.Courses;
 
 public class IBusinessImpl implements IBusiness {
 
+	private ArrayList<Courses> cart;
 	private CourseDao courseDao = new CourseDao();
 
-	@Override
-	public void addToCart() {
-		// TODO Auto-generated method stub
+	public IBusinessImpl() {
+		this.cart = new ArrayList<>();
+	}
 
+	@Override
+	public void addToCart(Courses course) {
+		cart.add(course);
 	}
 
 	@Override
@@ -24,8 +28,7 @@ public class IBusinessImpl implements IBusiness {
 
 	@Override
 	public ArrayList<Courses> getCart() {
-		// TODO Auto-generated method stub
-		return null;
+		return cart;
 	}
 
 	@Override
@@ -35,9 +38,8 @@ public class IBusinessImpl implements IBusiness {
 	}
 
 	@Override
-	public Courses readOneCourse() {
-		// TODO Auto-generated method stub
-		return null;
+	public Courses readOneCourse(int id) {
+		return courseDao.read(id);
 	}
 
 	@Override

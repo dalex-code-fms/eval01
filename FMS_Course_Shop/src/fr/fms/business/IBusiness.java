@@ -6,7 +6,7 @@ import fr.fms.entities.Category;
 import fr.fms.entities.Courses;
 
 public interface IBusiness {
-	public void addToCart();
+	public void addToCart(Courses course);
 
 	public void removeFromCart();
 
@@ -16,7 +16,7 @@ public interface IBusiness {
 
 	public ArrayList<Courses> readAllCourses();
 
-	public Courses readOneCourse();
+	public Courses readOneCourse(int id);
 
 	public ArrayList<Category> readCategories();
 }
