@@ -46,6 +46,8 @@ public class TestDao {
 
 		System.out.println(csDao.findCustomerByEmail("david@fms.fr"));
 
+		System.out.println(userDao.findUserByCredentials("klariany", "fms123"));
+
 	}
 
 }

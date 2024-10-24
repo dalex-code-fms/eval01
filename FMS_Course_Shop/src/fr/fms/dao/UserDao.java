@@ -131,4 +131,30 @@ public class UserDao implements Dao<User> {
 		}
 		return null;
 	}
+
+	/**
+	 * Search user in the database based in login and password.
+	 * 
+	 * @param login
+	 * @param pwd
+	 * @return The user object if found in the database.
+	 */
+
+	public User findUserByCredentials(String login, String pwd) {
+		String strSQL = "SELECT * FROM T_Users WHERE login = ? AND pwd = ?;";
+
+		try (PreparedStatement ps = connection.prepareStatement(strSQL)) {
+			ps.setString(1, login);
+			ps.setString(2, pwd);
+
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next())
+					return new User(rs.getInt("id"), rs.getString("login"), rs.getString("pwd"));
+			}
+		} catch (SQLException e) {
+			logger.severe("SQL problem when trying to find user by login and password : " + e.getMessage());
+		}
+
+		return null;
+	}
 }
