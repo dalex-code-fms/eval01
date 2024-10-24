@@ -1,5 +1,7 @@
 package fr.fms.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import fr.fms.entities.OrderItem;
@@ -8,7 +10,19 @@ public class OrderItemDao implements Dao<OrderItem> {
 
 	@Override
 	public boolean create(OrderItem obj) {
-		// TODO Auto-generated method stub
+		String strSQL = "INSERT INTO T_Order_Items ( idCourse, price, idOrder ) VALUES ( ?, ?, ? );";
+
+		try (PreparedStatement ps = connection.prepareStatement(strSQL)) {
+			ps.setInt(1, obj.getId());
+			ps.setDouble(2, obj.getPrice());
+			ps.setInt(3, obj.getIdOrder());
+
+			if (ps.executeUpdate() == 1)
+				return true;
+		} catch (SQLException e) {
+			logger.severe("SQL problem when trying to create a new orderItem : " + e.getMessage());
+		}
+
 		return false;
 	}
 
