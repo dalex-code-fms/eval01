@@ -12,13 +12,9 @@ public interface IBusiness {
 
 	public ArrayList<Courses> getCart();
 
-	public void displayCoursesByCat();
-
-	public void displayCoursesByformat();
-
-	public void displayCoursesByKeyword();
-
 	public int createOrder(int idUser);
+
+	public ArrayList<Courses> readAllCourses();
 
 	public Courses readOneCourse();
 
