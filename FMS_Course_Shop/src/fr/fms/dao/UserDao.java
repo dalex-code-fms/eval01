@@ -1,5 +1,7 @@
 package fr.fms.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import fr.fms.entities.User;
@@ -8,7 +10,18 @@ public class UserDao implements Dao<User> {
 
 	@Override
 	public boolean create(User obj) {
-		// TODO Auto-generated method stub
+		String strSQL = "INSERT INTO T_Users ( login , pwd ) VALUES ( ?, ? );";
+
+		try (PreparedStatement ps = connection.prepareStatement(strSQL)) {
+			ps.setString(1, obj.getLogin());
+			ps.setString(2, obj.getPwd());
+
+			if (ps.executeUpdate() == 1)
+				return true;
+
+		} catch (SQLException e) {
+			logger.severe("SQL Problem when trying to create a new user : " + e.getMessage());
+		}
 		return false;
 	}
 
