@@ -108,4 +108,21 @@ public class CustomerDao implements Dao<Customer> {
 		return null;
 	}
 
+	public Customer findCustomerByEmail(String email) {
+		String strSQL = "SELECT * FROM T_Customers WHERE email=?;";
+
+		try (PreparedStatement ps = connection.prepareStatement(strSQL)) {
+			ps.setString(1, email);
+
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next())
+					return new Customer(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"),
+							rs.getString("email"), rs.getString("address"), rs.getString("phone"), rs.getInt("idUser"));
+			}
+		} catch (SQLException e) {
+			logger.severe("SQL problem when trying to find customer by email : " + e.getMessage());
+		}
+		return null;
+	}
+
 }

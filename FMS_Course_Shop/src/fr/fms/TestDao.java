@@ -44,6 +44,8 @@ public class TestDao {
 		// csDao.delete(customer);
 		System.out.println(csDao.readAll());
 
+		System.out.println(csDao.findCustomerByEmail("david@fms.fr"));
+
 	}
 
 }
