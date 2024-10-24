@@ -19,10 +19,10 @@ public class OrderItemDao implements Dao<OrderItem> {
 
 			if (ps.executeUpdate() == 1)
 				return true;
+
 		} catch (SQLException e) {
 			logger.severe("SQL problem when trying to create a new orderItem : " + e.getMessage());
 		}
-
 		return false;
 	}
 
