@@ -72,7 +72,7 @@ public class CourseDao implements Dao<Courses> {
 	 * Updates a course in the database.
 	 * 
 	 * @param obj The course object with updated values.
-	 * @return true if the course was been updated, false if not.
+	 * @return true if the course has been updated, false if not.
 	 */
 
 	@Override

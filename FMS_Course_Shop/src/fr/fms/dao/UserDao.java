@@ -7,7 +7,18 @@ import java.util.ArrayList;
 
 import fr.fms.entities.User;
 
+/**
+ * Data Access Object (DAO) for managing User entities in the database.
+ */
+
 public class UserDao implements Dao<User> {
+
+	/**
+	 * Creates a new user in the database.
+	 * 
+	 * @param obj The user object.
+	 * @return true if the user was created and false if not.
+	 */
 
 	@Override
 	public boolean create(User obj) {
@@ -25,6 +36,13 @@ public class UserDao implements Dao<User> {
 		}
 		return false;
 	}
+
+	/**
+	 * Reads a user from the database based on the its ID.
+	 * 
+	 * @param id The ID of the user.
+	 * @return The user object if found and null if not.
+	 */
 
 	@Override
 	public User read(int id) {
@@ -44,6 +62,13 @@ public class UserDao implements Dao<User> {
 		return null;
 	}
 
+	/**
+	 * Updates a user in the database.
+	 * 
+	 * @param obj The user object with updated values.
+	 * @return true if the user has been updated, false if not.
+	 */
+
 	@Override
 	public boolean update(User obj) {
 		String strSQL = "UPDATE T_Users SET login = ?, pwd = ? WHERE id = ?;";
@@ -61,6 +86,13 @@ public class UserDao implements Dao<User> {
 		return false;
 	}
 
+	/**
+	 * Deletes an user in the database.
+	 * 
+	 * @param obj The user object to delete.
+	 * @return true if the users has been deleted, false if not.
+	 */
+
 	@Override
 	public boolean delete(User obj) {
 		String strSQL = "DELETE FROM T_Users WHERE id = ?;";
@@ -75,6 +107,12 @@ public class UserDao implements Dao<User> {
 		}
 		return false;
 	}
+
+	/**
+	 * Reads All users in the database.
+	 * 
+	 * @return a list of all users.
+	 */
 
 	@Override
 	public ArrayList<User> readAll() {
@@ -93,5 +131,4 @@ public class UserDao implements Dao<User> {
 		}
 		return null;
 	}
-
 }
