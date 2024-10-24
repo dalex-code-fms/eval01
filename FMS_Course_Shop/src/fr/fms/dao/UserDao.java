@@ -1,6 +1,7 @@
 package fr.fms.dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -27,7 +28,20 @@ public class UserDao implements Dao<User> {
 
 	@Override
 	public User read(int id) {
-		// TODO Auto-generated method stub
+		String strSQL = "SELECT * FROM T_Users WHERE id=?;";
+
+		try (PreparedStatement ps = connection.prepareStatement(strSQL)) {
+			ps.setInt(1, id);
+
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					return new User(rs.getInt("id"), rs.getString("login"), rs.getString("pwd"));
+				}
+			}
+		} catch (SQLException e) {
+			logger.severe("SQL problem trying to read a user : " + e.getMessage());
+		}
+
 		return null;
 	}
 

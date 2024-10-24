@@ -57,11 +57,9 @@ public class CourseDao implements Dao<Courses> {
 			try (ResultSet rs = ps.executeQuery()) {
 
 				if (rs.next()) {
-					Courses course = new Courses(rs.getInt("id"), rs.getString("name"), rs.getString("description"),
+					return new Courses(rs.getInt("id"), rs.getString("name"), rs.getString("description"),
 							rs.getInt("duration"), rs.getString("format"), rs.getDouble("price"),
 							rs.getInt("idCategory"));
-
-					return course;
 				}
 			}
 		} catch (SQLException e) {

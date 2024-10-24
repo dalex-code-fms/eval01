@@ -11,7 +11,12 @@ public class TestDao {
 		CourseDao courseDao = new CourseDao();
 		UserDao userDao = new UserDao();
 
-		userDao.create(new User("david", "fms123"));
+		// userDao.create(new User("david", "fms123"));
+
+		User user = userDao.read(2);
+
+		System.out.println(user);
+		// System.out.println(courseDao.readAll());
 	}
 
 }

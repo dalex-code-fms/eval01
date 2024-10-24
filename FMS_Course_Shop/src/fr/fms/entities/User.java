@@ -4,15 +4,21 @@ public class User {
 	private int id;
 	private String login;
 	private String pwd;
-	
+
 	public User(String login, String pwd) {
 		this.login = login;
 		this.pwd = pwd;
 	}
-	
+
+	public User(int id, String login, String pwd) {
+		this.id = id;
+		this.login = login;
+		this.pwd = pwd;
+	}
+
 	@Override
 	public String toString() {
-		return String.format("User : %d, %s, %s", id, login, pwd); 
+		return String.format("User : [id=%d, login='%s', pwd='%s']%n", id, login, pwd);
 	}
 
 	public int getId() {
@@ -38,5 +44,5 @@ public class User {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	
+
 }
