@@ -1,6 +1,7 @@
 package fr.fms;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 import fr.fms.business.IBusinessImpl;
@@ -77,11 +78,20 @@ public class Shop {
 	}
 
 	public static void displayOrderByMenu() {
-		int choice = verifyUserInput();
 		System.out.println("| 1 - CATEGORIES | 2 - KEYWORD | 3 - FORMAT | 4 - PRICE | 5 - GO BACK");
+		int choice = verifyUserInput();
 		switch (choice) {
 		case 1:
-
+			displaySortedCourses(Comparator.comparing(Courses::getIdCategory));
+			break;
+		case 2:
+			// displaySortedCourses(Comparator.comparing(Courses::getIdCategory));
+			break;
+		case 3:
+			displaySortedCourses(Comparator.comparing(Courses::getFormat));
+			break;
+		case 4:
+			displaySortedCourses(Comparator.comparing(Courses::getPrice));
 			break;
 		}
 	}
@@ -106,4 +116,24 @@ public class Shop {
 		return sc.nextInt();
 	}
 
+	public static void displaySortedCourses(Comparator<Courses> comparator) {
+		ArrayList<Courses> courses = ibus.readAllCourses();
+		courses.sort(comparator);
+		System.out.println(
+				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.printf("| %-5s | %-35s | %-50s | %-8s | %-10s | %-10s | %-8s |%n", "ID", "NAME", "DESCRIPTION",
+				"DURATION", "FORMAT", "PRICE", "CATEGORY");
+		System.out.println(
+				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+		courses.forEach(course -> System.out.printf("| %-5s | %-35s | %-50s | %-8s | %-10s | %-10s | %-8s |%n",
+				course.getId(), course.getName(), course.getDescription(), course.getDuration(), course.getFormat(),
+				course.getPrice(), course.getIdCategory()));
+		System.out.println(
+				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+	}
+
+	private static void displayByKeyword() {
+		// TODO Auto-generated method stub
+
+	}
 }
