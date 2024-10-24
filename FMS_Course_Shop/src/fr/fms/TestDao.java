@@ -1,8 +1,10 @@
 package fr.fms;
 
+import fr.fms.dao.CategoryDao;
 import fr.fms.dao.CourseDao;
 import fr.fms.dao.CustomerDao;
 import fr.fms.dao.UserDao;
+import fr.fms.entities.Category;
 import fr.fms.entities.Customer;
 import fr.fms.entities.User;
 
@@ -13,6 +15,7 @@ public class TestDao {
 		CourseDao courseDao = new CourseDao();
 		UserDao userDao = new UserDao();
 		CustomerDao csDao = new CustomerDao();
+		CategoryDao cat = new CategoryDao();
 
 		// userDao.create(new User("david", "fms123"));
 
@@ -47,6 +50,13 @@ public class TestDao {
 		System.out.println(csDao.findCustomerByEmail("david@fms.fr"));
 
 		System.out.println(userDao.findUserByCredentials("klariany", "fms123"));
+
+		System.out.println(cat.read(1));
+		Category catN = cat.read(1);
+		catN.setName("Hello");
+		cat.update(catN);
+		cat.delete(catN);
+		System.out.println(cat.readAll());
 
 	}
 
