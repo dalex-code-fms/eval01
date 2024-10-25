@@ -21,7 +21,7 @@ public class Shop {
 
 		while (choice != 9) {
 			displayCourses();
-			displayMenu();
+			displayHomeMenu();
 			choice = verifyUserInput();
 			switch (choice) {
 			case 1:
@@ -39,7 +39,7 @@ public class Shop {
 
 	}
 
-	public static void displayMenu() {
+	public static void displayHomeMenu() {
 		displayTextLines();
 		System.out.printf("|%47s%s%-46s|%n", "", "CHOOSE AS ACTION BY ENTERING THE CORRESPONDING NUMBER", "");
 		displayTextLines();
