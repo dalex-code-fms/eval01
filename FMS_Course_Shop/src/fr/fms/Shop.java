@@ -39,38 +39,30 @@ public class Shop {
 	}
 
 	public static void displayMenu() {
-		System.out.println(
-				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+		displayTextLines();
 		System.out.printf("|%47s%s%-46s|%n", "", "Choose an action by entering the corresponding number", "");
-		System.out.println(
-				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+		displayTextLines();
 		System.out.printf("|%-7s%s%7s|%-7s%s%7s|%-7s%s%7s|%-7s%s%7s|%-7s%s%8s|%n", "", "1 - ADD TO CART", "", "",
 				"2 - DISPLAY CART", "", "", "3 - DISPLAY COURSES BY:", "", "", "4 - LOGIN", "", "", "9 - EXIT", "");
-		System.out.println(
-				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+		displayTextLines();
 	}
 
 	public static void displayCourses() {
-		System.out.println(
-				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+		displayTextLines();
 		System.out.printf("| %-5s | %-35s | %-50s | %-8s | %-10s | %-10s | %-8s |%n", "ID", "NAME", "DESCRIPTION",
 				"DURATION", "FORMAT", "PRICE", "CATEGORY");
-		System.out.println(
-				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+		displayTextLines();
 		ibus.readAllCourses()
 				.forEach(course -> System.out.printf("| %-5s | %-35s | %-50s | %-8s | %-10s | %-10s | %-8s |%n",
 						course.getId(), course.getName(), course.getDescription(), course.getDuration(),
 						course.getFormat(), course.getPrice(), course.getIdCategory()));
-		System.out.println(
-				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+		displayTextLines();
 	}
 
 	public static void displayCart() {
-		System.out.println(
-				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+		displayTextLines();
 		System.out.println("| Cart |");
-		System.out.println(
-				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+		displayTextLines();
 		ArrayList<Courses> cart = ibus.getCart();
 		cart.forEach(course -> System.out.printf("| %-5s | %-35s | %-50s | %-8s | %-10s | %-10s | %-8s |%n",
 				course.getId(), course.getName(), course.getDescription(), course.getDuration(), course.getFormat(),
@@ -78,14 +70,18 @@ public class Shop {
 	}
 
 	public static void displayOrderByMenu() {
+		displayTextLines();
+		System.out.printf("|%-62s%s%61s|%n", "", "CHOOSE A SPECIFIC ORDER", "");
+		displayTextLines();
 		System.out.println("| 1 - CATEGORIES | 2 - KEYWORD | 3 - FORMAT | 4 - PRICE | 5 - GO BACK");
+		displayTextLines();
 		int choice = verifyUserInput();
 		switch (choice) {
 		case 1:
 			displaySortedCourses(Comparator.comparing(Courses::getIdCategory));
 			break;
 		case 2:
-			// displaySortedCourses(Comparator.comparing(Courses::getIdCategory));
+			displayCoursesByKeyword();
 			break;
 		case 3:
 			displaySortedCourses(Comparator.comparing(Courses::getFormat));
@@ -119,21 +115,44 @@ public class Shop {
 	public static void displaySortedCourses(Comparator<Courses> comparator) {
 		ArrayList<Courses> courses = ibus.readAllCourses();
 		courses.sort(comparator);
-		System.out.println(
-				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+		displayTextLines();
 		System.out.printf("| %-5s | %-35s | %-50s | %-8s | %-10s | %-10s | %-8s |%n", "ID", "NAME", "DESCRIPTION",
 				"DURATION", "FORMAT", "PRICE", "CATEGORY");
-		System.out.println(
-				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+		displayTextLines();
 		courses.forEach(course -> System.out.printf("| %-5s | %-35s | %-50s | %-8s | %-10s | %-10s | %-8s |%n",
 				course.getId(), course.getName(), course.getDescription(), course.getDuration(), course.getFormat(),
 				course.getPrice(), course.getIdCategory()));
-		System.out.println(
-				"----------------------------------------------------------------------------------------------------------------------------------------------------");
+		displayTextLines();
 	}
 
-	private static void displayByKeyword() {
-		// TODO Auto-generated method stub
+	public static void displayCoursesByKeyword() {
+		System.out.print("Enter the keyword : ");
+		String userInputScanner = sc.next().toLowerCase();
+		ArrayList<Courses> courses = ibus.readAllCourses();
 
+		boolean found = false;
+
+		displayTextLines();
+		System.out.printf("| %-5s | %-35s | %-50s | %-8s | %-10s | %-10s | %-8s |%n", "ID", "NAME", "DESCRIPTION",
+				"DURATION", "FORMAT", "PRICE", "CATEGORY");
+		displayTextLines();
+		for (Courses course : courses) {
+			if (course.getName().toLowerCase().contains(userInputScanner)
+					|| course.getDescription().toLowerCase().contains(userInputScanner)) {
+				System.out.printf("| %-5s | %-35s | %-50s | %-8s | %-10s | %-10s | %-8s |%n", course.getId(),
+						course.getName(), course.getDescription(), course.getDuration(), course.getFormat(),
+						course.getPrice(), course.getIdCategory());
+				found = true;
+			}
+		}
+
+		if (!found)
+			System.out.printf("|%-64s%s%65s|%n", "", "NO COURSES FOUND.", "");
+		displayTextLines();
+	}
+
+	public static void displayTextLines() {
+		System.out.println(
+				"----------------------------------------------------------------------------------------------------------------------------------------------------");
 	}
 }
