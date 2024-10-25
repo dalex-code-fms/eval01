@@ -15,11 +15,12 @@ public class Shop {
 	public static void main(String[] args) {
 		System.out.println(
 				"----------------------------------------------------------------------------------------------------------------------------------------------------");
-		System.out.printf("|%60s%s%-60s|%n", "", "Welcome to FMS Course Shop", "");
-		displayCourses();
+		System.out.printf("|%60s%s%-60s|%n", "", "WELCOME TO FMS COURSE SHOP", "");
+
 		int choice = 0;
 
-		while (choice != 10) {
+		while (choice != 9) {
+			displayCourses();
 			displayMenu();
 			choice = verifyUserInput();
 			switch (choice) {
@@ -31,7 +32,7 @@ public class Shop {
 				break;
 			case 3:
 				displayCourses();
-				displayOrderByMenu();
+				displaySortedOrderMenu();
 				break;
 			}
 		}
@@ -40,7 +41,7 @@ public class Shop {
 
 	public static void displayMenu() {
 		displayTextLines();
-		System.out.printf("|%47s%s%-46s|%n", "", "Choose an action by entering the corresponding number", "");
+		System.out.printf("|%47s%s%-46s|%n", "", "CHOOSE AS ACTION BY ENTERING THE CORRESPONDING NUMBER", "");
 		displayTextLines();
 		System.out.printf("|%-7s%s%7s|%-7s%s%7s|%-7s%s%7s|%-7s%s%7s|%-7s%s%8s|%n", "", "1 - ADD TO CART", "", "",
 				"2 - DISPLAY CART", "", "", "3 - DISPLAY COURSES BY:", "", "", "4 - LOGIN", "", "", "9 - EXIT", "");
@@ -69,27 +70,33 @@ public class Shop {
 				course.getPrice(), course.getIdCategory()));
 	}
 
-	public static void displayOrderByMenu() {
-		displayTextLines();
-		System.out.printf("|%-62s%s%61s|%n", "", "CHOOSE A SPECIFIC ORDER", "");
-		displayTextLines();
-		System.out.println("| 1 - CATEGORIES | 2 - KEYWORD | 3 - FORMAT | 4 - PRICE | 5 - GO BACK");
-		displayTextLines();
-		int choice = verifyUserInput();
-		switch (choice) {
-		case 1:
-			displaySortedCourses(Comparator.comparing(Courses::getIdCategory));
-			break;
-		case 2:
-			displayCoursesByKeyword();
-			break;
-		case 3:
-			displaySortedCourses(Comparator.comparing(Courses::getFormat));
-			break;
-		case 4:
-			displaySortedCourses(Comparator.comparing(Courses::getPrice));
-			break;
+	public static void displaySortedOrderMenu() {
+
+		int choice = 0;
+		while (choice != 5) {
+			displayTextLines();
+			System.out.printf("|%47s%s%-46s|%n", "", "CHOOSE AS ACTION BY ENTERING THE CORRESPONDING NUMBER", "");
+			displayTextLines();
+			System.out.printf("|%-9s%s%8s|%-9s%s%8s|%-9s%s%8s|%-9s%s%9s|%-9s%s%9s|%n", "", "1 - CATEGORIES", "", "",
+					"2 - KEYWORD", "", "", "3 - FORMAT", "", "", "4 - PRICE", "", "", "5 - GO BACK", "");
+			displayTextLines();
+			choice = verifyUserInput();
+			switch (choice) {
+			case 1:
+				displaySortedCourses(Comparator.comparing(Courses::getIdCategory));
+				break;
+			case 2:
+				displayCoursesByKeyword();
+				break;
+			case 3:
+				displaySortedCourses(Comparator.comparing(Courses::getFormat));
+				break;
+			case 4:
+				displaySortedCourses(Comparator.comparing(Courses::getPrice));
+				break;
+			}
 		}
+
 	}
 
 	public static void addCourseToCart() {
